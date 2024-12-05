@@ -1,5 +1,9 @@
-import logo from './logo.svg';
-import './App.css';
+import AuthScreens from "./Components/AuthScreens"
 
-function App() {
+export default function App() {
   return (
+    <>
+      <AuthScreens/>
+    </>
+  )
+}
