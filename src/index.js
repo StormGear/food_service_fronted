@@ -3,6 +3,23 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { createBrowserRouter,   } from 'react-router';
+import NotFound from './components/NotFound';
+import HomePage from './components/main/HomePage';
+import AuthScreens from './components/auth/AuthScreens';
+
+export const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <AuthScreens />,
+    errorElement: <NotFound/>
+  },
+  {
+    path: '/users/:userId',
+    element: <HomePage />,
+  },
+
+]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

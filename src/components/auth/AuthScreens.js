@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Mail, Lock, User, Eye, EyeOff, BeanOff } from 'lucide-react';
-import { AuthContext } from '../ContextProviders/AuthContext';
+import { AuthContext } from '../../contextproviders/AuthContext';
 
 const AuthScreens = () => {
   const { authState, login, logout, signup } = useContext(AuthContext)

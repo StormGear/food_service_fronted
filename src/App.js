@@ -1,10 +1,11 @@
-import AuthScreens from "./Components/AuthScreens"
-import { AuthProvider } from "./ContextProviders/AuthContext"
+import { RouterProvider } from "react-router-dom"
+import { AuthProvider } from "./contextproviders/AuthContext"
+import { router } from "./index"
 
 export default function App() {
   return (
     <AuthProvider>
-      <AuthScreens/>
+      <RouterProvider router={router}/>
     </AuthProvider>
   )
 }
