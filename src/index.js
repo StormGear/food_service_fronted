@@ -7,6 +7,7 @@ import { createBrowserRouter,   } from 'react-router';
 import NotFound from './components/NotFound';
 import HomePage from './components/main/HomePage';
 import AuthScreens from './components/auth/AuthScreens';
+import Cart from './components/main/cart/Cart';
 
 export const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ export const router = createBrowserRouter([
   {
     path: '/users/:userId',
     element: <HomePage />,
+  },
+  {
+    path: '/users/:userId/cart',
+    element: <Cart />,
   },
 
 ]);

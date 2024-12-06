@@ -1,15 +1,14 @@
-
 import React from 'react'
-import {  useParams } from 'react-router';
+import Menu from './menu/Menu';
+import Navbar from '../Navbar';
 
 const HomePage = () => {
-    const { userId } = useParams();
+
 
   return (
     <div>
-      <div className="flex flex-col items-center justify-center h-screen">
-        <h1>Home Page {userId}</h1>
-      </div>
+      <Navbar />
+      <Menu />
     </div>
   )
 }
