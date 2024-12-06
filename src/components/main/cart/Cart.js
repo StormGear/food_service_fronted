@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useContext } from "react";
-import { CartContext } from "../../../contextproviders/CartContext";
+import { CartContext } from "../../../contextproviders/Cartcontext";
 import { NavLink, useParams } from "react-router-dom";
 
 const Cart = () => {

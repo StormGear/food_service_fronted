@@ -1,7 +1,7 @@
 import React from "react";
 import MenuItem from "./MenuItem";
 import { useContext } from "react";
-import { CartContext } from "../../../contextproviders/CartContext";
+import { CartContext } from "../../../contextproviders/Cartcontext";
 
 const Menu = () => {
   const { menuItems, addToCart } = useContext(CartContext);

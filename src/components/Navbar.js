@@ -3,7 +3,7 @@
 import React from 'react'
 import { NavLink, useParams } from "react-router";
 import { useContext } from "react";
-import { CartContext } from "../contextproviders/CartContext";
+import { CartContext } from "../contextproviders/Cartcontext";
 
 
 const Navbar = () => {

@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { CartContext } from "../../../contextproviders/CartContext";
+import { CartContext } from "../../../contextproviders/Cartcontext";
 
 const MenuItem = ({ item, onAddToCart }) => {
   const [selectedOptions, setSelectedOptions] = useState([]);
