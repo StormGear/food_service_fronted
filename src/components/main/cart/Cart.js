@@ -15,9 +15,6 @@ const Cart = () => {
     return () => console.log("Cart unmounted");
   })
 
-  const increaseQuantity = (currentQuantity) => {
-
-  }
 
   return (
     <div className="p-4 mt-4">
