@@ -4,7 +4,7 @@ import React, { useState,  createContext } from "react";
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  const [menuItems, setMenuItems] = useState([
+  const [menuItems] = useState([
     {
       id: 1,
       name: "Margherita Pizza",

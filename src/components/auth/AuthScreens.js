@@ -3,7 +3,7 @@ import { Mail, Lock, User, Eye, EyeOff, BeanOff } from 'lucide-react';
 import { AuthContext } from '../../contextproviders/AuthContext';
 
 const AuthScreens = () => {
-  const { authState, login, logout, signup } = useContext(AuthContext)
+  const {  login, logout, signup } = useContext(AuthContext)
   const [isLogin, setIsLogin] = useState(true);
   const [passwordCheck, setPasswordCheck] = useState('');
   const [showPassword, setShowPassword] = useState(false);
