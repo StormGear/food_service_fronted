@@ -4,14 +4,18 @@ import React, { useState,  useReducer, useContext } from "react";
 import { loadingReducer, initialState } from "../../reducers/reducers";
 import Spinner from "../../Spinner";
 import { CartContext } from "../../../contextproviders/Cartcontext";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../contextproviders/Authcontext";
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const MenuItem = ({ item, onAddToCart }) => {
   const [selectedOptions, setSelectedOptions] = useState([]);
-  // const { cart } = useContext(CartContext);
   const [loadingState, dispatch] = useReducer(loadingReducer, initialState);
   const { cartItems } = useContext(CartContext)
+  const { authState } = useContext(AuthContext)
+
+  const navigate = useNavigate();
 
   const handleOptionChange = (option) => {
     setSelectedOptions((prev) =>
@@ -25,7 +29,8 @@ const MenuItem = ({ item, onAddToCart }) => {
     return cartItems.find((item) => item.menuitem_id === id);
   }
 
-  const handleAddToCart = async () => {
+  const handleAddToCart = async (e) => {
+   if (e.target.textContent === 'Add to Cart') {
     dispatch({ type: 'LOADING' });
     await delay(2000); // 2-second delay
     const res = await onAddToCart(item, selectedOptions)
@@ -34,6 +39,9 @@ const MenuItem = ({ item, onAddToCart }) => {
     } else {
       dispatch({ type: 'SUCCESS' });
     }
+  } else {
+    navigate(`/users/${authState.user.user_id}/cart`)
+  }
   };
 
   return (
@@ -76,7 +84,7 @@ const MenuItem = ({ item, onAddToCart }) => {
       )}
        <button
             disabled={loadingState.loading}
-            onClick={handleAddToCart}
+            onClick={ handleAddToCart}
             className={`${loadingState.loading ? "bg-gray-300" : "bg-blue-500"} text-white px-4 py-2 rounded min-w-20`}
           >
             {(() => {
