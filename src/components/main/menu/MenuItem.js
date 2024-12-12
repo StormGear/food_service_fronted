@@ -7,7 +7,7 @@ import { CartContext } from "../../../contextproviders/Cartcontext";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contextproviders/Authcontext";
 
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 
 const MenuItem = ({ item, onAddToCart }) => {
   const [selectedOptions, setSelectedOptions] = useState([]);
@@ -32,7 +32,6 @@ const MenuItem = ({ item, onAddToCart }) => {
   const handleAddToCart = async (e) => {
    if (e.target.textContent === 'Add to Cart') {
     dispatch({ type: 'LOADING' });
-    await delay(2000); // 2-second delay
     const res = await onAddToCart(item, selectedOptions)
     if (res.error) {
       dispatch({ type: 'ERROR', payload: res.message });

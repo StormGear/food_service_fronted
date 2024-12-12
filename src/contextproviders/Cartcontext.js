@@ -8,6 +8,7 @@ export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
+  const [totalCost, setTotalCost] = useState(0);
   const { authState } = useContext(AuthContext)
 
   const addToCart =  async (item, newOptions) => {
@@ -54,25 +55,73 @@ export const CartProvider = ({ children }) => {
   }
   
  
+  const updateQuantity = async (item, quantity) => {
+    console.log('input item', item);
+    try {
+      let response;
+      console.log(`updating the quantity for ${item.cartitem_id} from cart`)
+        response = await axios.put(`${baseUrl}/api/cartitems/update-cartitem-quantity`, {
+          cartitem_id: item.cartitem_id,
+          quantity: quantity
+        });
+        return {
+          success: 'success',
+          quantity: response.data.quantity
+        }
+    } catch (error) {
+      if (error.response) {
+        console.log('error', error.response.data.message ?? error.message)
+        return {
+          error: 'error',
+          message: error.response.data.message ?? error.message
+        }
+      } else {
+        console.log('error', error.message)
+        return {
+          error: 'error',
+          message:  error.message
+        }
+
+      }
+    }   
+
+  }
 
 
-  const updateCartItem = (id, quantity) => {
-    setCartItems((prevCart) =>
-      prevCart
-        .map((item) => (item.id === id ? { ...item, quantity } : item))
-        .filter((item) => item.quantity > 0)
-    );
+  const removeCartItem = async (item) => {
+    console.log('input item', item);
+    try {
+      let response;
+        response = await axios.delete(`${baseUrl}/api/cartitems/remove-cartitem/${item.cartitem_id}/${item.menuitem_id}`);
+        return {
+          success: 'success',
+          message: response.data.message
+        }
+    } catch (error) {
+      if (error.response) {
+        console.log('error', error.response.data.message ?? error.message)
+        return {
+          error: 'error',
+          message: error.response.data.message ?? error.message
+        }
+      } else {
+        console.log('error', error.message)
+        return {
+          error: 'error',
+          message:  error.message
+        }
+
+      }
+    }
   };
 
-  const clearCart = async () => {
-    const cart_id = authState.user.user_id
+  const clearCart = async (item) => {
+
     try {
 
       let response;
-      console.log('clearing the cart')
-        response = await axios.delete(`${baseUrl}/api/cartitems/clear-cart/${cart_id}`);
+        response = await axios.delete(`${baseUrl}/api/cartitems/clear-cart/${item}`);
         console.log('cartitem_res', response.data)
-        setCartItems([])
         return {
           success: 'success',
         }
@@ -96,7 +145,7 @@ export const CartProvider = ({ children }) => {
   };
 
   return (
-    <CartContext.Provider value={{  cartItems, setCartItems, addToCart, updateCartItem, clearCart }}>
+    <CartContext.Provider value={{  cartItems, setCartItems, addToCart, removeCartItem, clearCart, updateQuantity, totalCost, setTotalCost}}>
       {children}
     </CartContext.Provider>
   );
