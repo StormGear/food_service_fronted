@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
@@ -6,14 +7,19 @@ import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter,   } from 'react-router';
 import NotFound from './components/NotFound';
 import HomePage from './components/main/HomePage';
-import AuthScreens from './components/auth/AuthScreens';
+import Signup from './components/auth/Signup';
+import Login from './components/auth/Login';
 import Cart from './components/main/cart/Cart';
 
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <AuthScreens />,
+    element: <Login />,
     errorElement: <NotFound/>
+  },
+  {
+    path: '/signup',
+    element: <Signup />
   },
   {
     path: '/users/:userId',

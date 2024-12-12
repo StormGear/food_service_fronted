@@ -1,42 +1,42 @@
+// @ts-nocheck
 import React, { createContext, useReducer } from 'react';
+import { authStateReducer, initialAuthState } from '../components/reducers/reducers';
 
+
+// @ts-ignore
 export const AuthContext = createContext();
 
-const initialAuthState = {
-    isAuthenticated: false,
-    user: null,
-  }
-
-  const authStateReducer = (state, action) => {
-    switch (action.type) {
-        case 'signup':
-            return { ...state, user: action.value }
-        case 'login':
-            return { ...state, user: action.value }
-        case 'logout':
-            return { ...state, user: null }
-        default:
-            return state
-    }
-  }
 
 export const AuthProvider = ({ children }) => {
-    const [authState, dispatchAuthState] = useReducer(authStateReducer, initialAuthState)
-  
-    const login = (user) => {
-     dispatchAuthState({ type: 'login', value: user })
+    const [authState, dispatch] = useReducer(authStateReducer, initialAuthState)
+   
+
+    const login =  (user) => {
+        if (user.message === "Login successful") {
+          // @ts-ignore
+          console.log("user", user.user)
+          dispatch({ type: 'LOGIN', payload: user.user })
+          console.log(authState)
+          return 'success'
+        } else {
+          console.log("Login was not successful", user)
+          dispatch({ type: 'LOGOUT' }) 
+          return 'error'
+        }
     };
   
     const logout = () => {
-        dispatchAuthState({ type: 'logout' })
+        // @ts-ignore
+        dispatch({ type: 'LOGOUT' })
     };
 
     const signup = (user) => {
-        dispatchAuthState({ type: 'signup', value: user })
+        // @ts-ignore
+        dispatch({ type: 'SIGNUP', payload: user })
     }
   
     return (
-      <AuthContext.Provider value={{ authState, login, logout, signup }}>
+      <AuthContext.Provider value={{ authState, dispatch, login, logout, signup }}>
         {children}
       </AuthContext.Provider>
     );
