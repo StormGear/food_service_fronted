@@ -31,9 +31,16 @@ export const AuthProvider = ({ children }) => {
     };
 
     const signup = (user) => {
+      if (user.user_id) {
         // @ts-ignore
         dispatch({ type: 'SIGNUP', payload: user })
+        return 'success'
+    } else {
+      console.log("signup was not was not successful", user)
+      dispatch({ type: 'LOGOUT' }) 
+      return 'error'
     }
+  }
   
     return (
       <AuthContext.Provider value={{ authState, dispatch, login, logout, signup }}>

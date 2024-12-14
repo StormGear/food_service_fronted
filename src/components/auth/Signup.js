@@ -5,11 +5,16 @@ import { AuthContext } from '../../contextproviders/Authcontext';
 import { NavLink } from 'react-router-dom';
 // import { Spinner } from "flowbite-react";
 import { loadingReducer, initialState } from '../reducers/reducers';
+import axios from 'axios';
+import baseUrl from '../../constants';
+import { useNavigate } from 'react-router-dom';
+import Spinner from '../Spinner';
 
 const Signup = () => {
   const {  signup } = useContext(AuthContext)
-  const [passwordCheck, setPasswordCheck] = useState('');
-  const [emailCheck, setEmailCheck] = useState('');
+  const [passwordCheck, setPasswordCheck] = useState('Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.');
+  const [nameCheck, setNameCheck] = useState('Name of at least 4 characters is required');
+  const [emailCheck, setEmailCheck] = useState('Enter a valid email address');
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
@@ -17,6 +22,7 @@ const Signup = () => {
     name: '',
     allergies: ''
   });
+  const navigate = useNavigate();
 
 
  const [loadingState, dispatch] = useReducer(loadingReducer, initialState);
@@ -41,6 +47,10 @@ const Signup = () => {
       return re.test(email);
     }
 
+    const validateName = (name) => {
+      return name.trim().length >= 4;
+    }
+
     if (e.target.name === 'password') {
       const isValid = validatePassword(e.target.value);
       if (!isValid) {
@@ -58,30 +68,55 @@ const Signup = () => {
         setEmailCheck('')
       }
     }
+
+    if (e.target.name === 'name') {
+      const isValid = validateName(e.target.value);
+      if (!isValid) {
+        setNameCheck('Name of at least 4 characters is required')
+      } else {
+        setNameCheck('')
+      }
+    }
     
   };
 
   const handleSubmit =  async (e) => {
     e.preventDefault();
     dispatch({ type: 'LOADING' });
+    let response
 
     try {
-   
-
-      // Perform sign up
+      response = await axios.post(`${baseUrl}/api/users/add-user`, {
+        email: formData.email,
+        password: formData.password,
+        name: formData.name,
+        allergies: formData.allergies.split(',')
+      });
+      // Perform signup
+      console.log('response', response.data)
       // After sign up, you might want to log the user in
-      signup({ email: formData.email, name: formData.name, allergies: formData.allergies, password: formData.password })
+      const res = signup(response.data)
+      if (res === 'error') {
+        dispatch({ type: 'ERROR', payload: 'Signup was not successful' })
+      } else {
+        dispatch({ type: 'SUCCESS' });
+        navigate(`/users/${response.data.user_id}`)
+      }
     
-  } catch (e) {
-   dispatch({ type: 'ERROR', payload: e.message})
-    console.log(`An error occurred: ${e.toString()}`)
+  } catch (error) {
+    if (error.response) {
+      console.log('error signing up', error.response.data.message ?? error.message)
+      dispatch({ type: 'ERROR', payload: 'Error signing up' })
+    } else {
+    console.log(`An error occurred: ${error.toString()}`)
+    }
   }
     console.log('Form submitted:', formData);
   };
 
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4 bg-custom-image">
       <div className="w-full max-w-md bg-white rounded-lg shadow-lg overflow-hidden">
         {/* Header */}
         <div className="p-6 bg-white border-b border-gray-200">
@@ -120,6 +155,7 @@ const Signup = () => {
                     onChange={handleInputChange}
                   />
                 </div>
+                <p>{nameCheck}</p>
               </div>
               {/* Allergies field  */}
             <div>
@@ -135,7 +171,7 @@ const Signup = () => {
                   id="allergies"
                   name="allergies"
                   type="text"
-                  placeholder="eg. groundnuts"
+                  placeholder="eg. groundnuts,rice separated by commas"
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
                   value={formData.allergies}
                   onChange={handleInputChange}
@@ -202,10 +238,12 @@ const Signup = () => {
 
           {/* Submit Button */}
           <button
+           disabled={(passwordCheck.length > 0 && emailCheck.length > 0 && nameCheck.length > 0) || loadingState.loading}
             type="submit"
-            className="mt-6 w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
-          >
-             Sign Up
+            className={`mt-6 w-full  py-2 px-4 rounded-lg focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors
+              ${(passwordCheck.length > 0 || emailCheck.length > 0 || nameCheck.length > 0) || loadingState.loading ? 'bg-gray-400 text-white cursor-not-allowed' : 'bg-blue-600 text-white hover:bg-blue-700'}
+              `}>
+             { loadingState.loading ? <Spinner /> : 'Signup'}
           </button>
 
           {/* Toggle Link */}

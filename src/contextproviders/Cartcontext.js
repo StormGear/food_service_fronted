@@ -84,7 +84,38 @@ export const CartProvider = ({ children }) => {
 
       }
     }   
+  }
 
+  const placeOrder = async (userId, total_cost) => {
+    console.log('user with Id',  userId);
+    try {
+      let response;
+      console.log(`placing order for ${userId} at total cost of ${total_cost} from cart`)
+
+        response = await axios.put(`${baseUrl}/api/orders/add-order`, {
+          user_id: userId,
+          total_amount: total_cost
+        });
+        return {
+          success: 'success',
+          quantity: response.data.order_id
+        }
+    } catch (error) {
+      if (error.response) {
+        console.log('error', error.response.data.message ?? error.message)
+        return {
+          error: 'error',
+          message: error.response.data.message ?? error.message
+        }
+      } else {
+        console.log('error', error.message)
+        return {
+          error: 'error',
+          message:  error.message
+        }
+
+      }
+    }   
   }
 
 
@@ -140,12 +171,11 @@ export const CartProvider = ({ children }) => {
         }
 
       }
-    }
-    
+    } 
   };
 
   return (
-    <CartContext.Provider value={{  cartItems, setCartItems, addToCart, removeCartItem, clearCart, updateQuantity, totalCost, setTotalCost}}>
+    <CartContext.Provider value={{  cartItems, setCartItems, addToCart, removeCartItem, clearCart, updateQuantity, totalCost, setTotalCost, placeOrder}}>
       {children}
     </CartContext.Provider>
   );

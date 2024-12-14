@@ -11,9 +11,10 @@ import  Spinner  from '../Spinner';
 import { useNavigate } from 'react-router-dom';
 
 
+
 const Login = () => {
     const {  login } = useContext(AuthContext)
-    const [passwordCheck, setPasswordCheck] = useState(' Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.');
+    const [passwordCheck, setPasswordCheck] = useState('Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.');
     const [emailCheck, setEmailCheck] = useState('Enter a valid email address');
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
@@ -68,7 +69,6 @@ const Login = () => {
       // @ts-ignore
       dispatch({ type: 'LOADING' });
       let response;
-  
       
       try {
         response = await axios.post(`${baseUrl}/api/users/login`, {
@@ -99,8 +99,8 @@ const Login = () => {
     };
   
     return (
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
-        <div className="w-full max-w-md bg-white rounded-lg shadow-lg overflow-hidden">
+      <div className="bg-custom-image bg-cover bg-center bg-no-repeat min-h-screen bg-gray-100 flex items-center justify-center p-4">
+        <div className="w-full md:w-1/2 max-w-md bg-white rounded-lg shadow-lg overflow-hidden">
           {/* Header */}
           <div className="p-6 bg-white border-b border-gray-200">
             <h2 className="text-2xl font-bold text-gray-800">

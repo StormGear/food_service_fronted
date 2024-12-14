@@ -4,12 +4,13 @@ import { NavLink, useParams } from "react-router-dom";
 import axios from "axios";
 import baseUrl from "../../../constants";
 import CartItem from "./CartItem";
+import { IoCloseCircleOutline } from "react-icons/io5";
 
 
 const Cart = () => {
   // const getTotal = () =>
   //   cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-  const {  cartItems, totalCost, setTotalCost, clearCart, setCartItems } = useContext(CartContext);
+  const {  cartItems, totalCost, setTotalCost, clearCart, setCartItems, placeOrder } = useContext(CartContext);
   const { userId } = useParams()
 
   useEffect(() => {
@@ -45,6 +46,20 @@ const Cart = () => {
     }
   }
 
+  const handlePlaceOrder = async (userId, total_cost) => {
+    try {
+      const response = await placeOrder(userId, total_cost);
+      if (response.success) {
+        setCartItems([]);
+        setTotalCost(0);
+      } else {
+        console.error("Error placing order:", response.message);
+      }
+    } catch (error) {
+      console.error("Error placing order:", error);
+    }
+  }
+
 
 
 
@@ -56,7 +71,7 @@ const Cart = () => {
         <p className="text-gray-700 mb-4 font-bold">Your cart is empty.</p>
         <NavLink
         to={`/users/${userId}`}
-        className="bg-blue-500 text-white px-4 py-2 rounded"
+        className="bg-sky-500/100 text-white px-4 py-2 rounded"
       >
         Back to Menu
       </NavLink>
@@ -76,22 +91,23 @@ const Cart = () => {
             <p className="font-semibold">
               Total: GH₵ {totalCost}
             </p>
-            <div className="flex justify-between mt-4">
+            <div className="flex flex-col sm:flex-row justify-between mt-4">
               <button
                 onClick={() => handleClearCart(userId)}
-                className="bg-red-500 text-white px-4 py-2 rounded"
+                className="bg-red-500 text-white px-4 py-2 my-2 rounded max-w-max" 
               >
                 Clear Cart
               </button>
+
               <NavLink
                 to={`/users/${userId}`}
-                className="bg-blue-500 text-white px-4 py-2 rounded"
+                className="bg-sky-500/100 text-white px-4 py-2 my-2 rounded max-w-max"
               >
                 Back to Menu
               </NavLink>
               <button
-                onClick={() => alert("Order placed!")}
-                className="bg-green-500 text-white px-4 py-2 rounded"
+                onClick={() => handlePlaceOrder(userId, totalCost)}
+                className="bg-secondary-color text-white px-4 py-2 my-2 rounded max-w-max"
               >
                 Place Order
               </button>

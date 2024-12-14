@@ -44,7 +44,7 @@ const MenuItem = ({ item, onAddToCart }) => {
   };
 
   return (
-    <div className="border p-4 rounded shadow-md mb-4">
+    <div className="border p-4 rounded shadow-md mb-4 max-w-72">
       <h2 className="text-xl font-semibold">{item.name}</h2>
       <p className="text-gray-700">Price: GH₵ {item.price}</p>
       <div className="text-gray-700">
@@ -84,7 +84,7 @@ const MenuItem = ({ item, onAddToCart }) => {
        <button
             disabled={loadingState.loading}
             onClick={ handleAddToCart}
-            className={`${loadingState.loading ? "bg-gray-300" : "bg-blue-500"} text-white px-4 py-2 rounded min-w-20`}
+            className={`${loadingState.loading ? "bg-gray-300" : "bg-secondary-color"} text-white px-4 py-2 rounded min-w-20`}
           >
             {(() => {
           switch (loadingState.success) {

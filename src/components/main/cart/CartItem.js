@@ -3,6 +3,11 @@
 import React from 'react'
 import { useContext } from "react";
 import { CartContext } from "../../../contextproviders/Cartcontext";
+import { IoCloseCircle } from 'react-icons/io5';
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+
 
 const CartItem = ({ item}) => {
     const {   removeCartItem, setTotalCost, totalCost, setCartItems, updateQuantity } = useContext(CartContext);
@@ -27,7 +32,7 @@ const CartItem = ({ item}) => {
     <div>
       <p className="font-semibold">{item.name}</p>
       <p className="text-gray-700">Price: GH₵{item.price}</p>
-      <p className="text-gray-700">Quantity: {quantity}</p>
+       <p className="text-gray-700">Quantity: {quantity}</p>
       <div className="mt-4">
     { item.extra_toppings.length > 0 && <p className="font-semibold">Extra Toppings:</p>} 
     <ul className="list-disc ml-6">
@@ -40,46 +45,63 @@ const CartItem = ({ item}) => {
       <p className="font-semibold">Total: GH₵ {item.price * quantity}</p>
     </div> 
     </div>
-    <div>
-    
-    <button
-    key={item.cartitem_id}
-    onClick={() => handleRemoveCartItem(item)}
-    className="bg-red-500 text-white px-4 py-2 rounded"
-  >
-    Remove Item
-  </button>
-      
-      <span className="px-4 cursor-pointer" onClick={async () =>
-        { 
-          if (item.quantity === 1) {
-            return;
-          }
-          setQuantity((prevQuantity) => prevQuantity - 1);
-          const res = await updateQuantity(item, item.quantity - 1)
-            if (res.success) {
-                setTotalCost(totalCost - parseFloat(item.price))
+
+    <div className='flex-col sm:flex-row'>
+        <div className='sm:inline'>
+            <button
+            key={item.cartitem_id}
+            onClick={() => handleRemoveCartItem(item)}
+            className="hidden sm:inline rounded"
+            >
+                  <Tooltip title="Delete" >
+                     <IconButton>
+                    <DeleteIcon className=' text-red-500' />
+                    </IconButton>
+                  </Tooltip>
+            {/* <IoCloseCircle /> */}
+                   </button>
+               
+                  
+                  <span className="p-2 sm:px-4 cursor-pointer" onClick={async () =>
+            {
+              if (item.quantity === 1) {
+                return;
+              }
+              setQuantity((prevQuantity) => prevQuantity - 1);
+              const res = await updateQuantity(item, item.quantity - 1)
+                if (res.success) {
+                    setTotalCost(totalCost - parseFloat(item.price))
+                }
             }
-        }
-        } >-</span>
-      <input
-        min="1"
-        value={quantity}
-        readOnly
-        onChange={(e) => 
-          updateQuantity(item, parseFloat(e.target.value)
-        ) 
-        }
-        className="w-16 border text-center"
-      />
-      <span className="px-4 cursor-pointer" onClick={async () => {
-        setQuantity((prevQuantity) => prevQuantity + 1);
-        const res = await updateQuantity(item, item.quantity + 1)
-        if (res.success) {
-            setTotalCost(totalCost + parseFloat(item.price))
-        }
-      }}>+</span>
+            } >-</span>
+                  <input
+            min="1"
+            value={quantity}
+            readOnly
+            onChange={(e) =>
+              updateQuantity(item, parseFloat(e.target.value)
+            )
+            }
+            className="w-16 border text-center"
+                  />
+                  <span className="p-2 sm:px-4 cursor-pointer" onClick={async () => {
+            setQuantity((prevQuantity) => prevQuantity + 1);
+            const res = await updateQuantity(item, item.quantity + 1)
+            if (res.success) {
+                setTotalCost(totalCost + parseFloat(item.price))
+            }
+                  }}>+</span>
+        </div>
+
+      <button
+        key={item.cartitem_id}
+        onClick={() => handleRemoveCartItem(item)}
+        className="sm:hidden my-4 bg-red-500 text-white px-4 py-2 rounded"
+    >
+        <IoCloseCircle />
+      </button>
     </div>
+
   </li>
   )
 }
