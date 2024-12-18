@@ -3,22 +3,22 @@
 import React from 'react'
 import { DataGrid } from '@mui/x-data-grid';
 import Navbar from '../../Navbar';
-import { useState, useEffect, useReducer } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import baseUrl from '../../../constants';
-import { loadingReducer, initialState } from '../../reducers/reducers';
 import dateFormat from "dateformat";
+import Chip from '@mui/material/Chip';
 
 const Orders = () => {
     const [orders, setOrders] = useState([]);
     const { userId } = useParams()
-    const [loadingState, dispatch] = useReducer(loadingReducer, initialState);
+    
 
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-            dispatch({ type: 'LOADING' });
+         
             const response = await axios.get(`${baseUrl}/api/orders/${userId}`)
             response.data.forEach((order, index) => {
                 order.id = index + 1;
@@ -28,10 +28,10 @@ const Orders = () => {
                 order.updated_at = dateFormat(updatedDate, "mmmm dS, yyyy, h:MM TT");
             });
             setOrders([...response.data]);
-            dispatch({ type: 'SUCCESS' });
+            
             console.log('orders', orders)
             } catch (error) {
-                dispatch({ type: 'ERROR', payload: error.message });
+               
             console.error("Error fetching orders:", error);
             } finally {
                 console.log('orders', orders)
@@ -57,11 +57,24 @@ const Orders = () => {
 
 
 const columns = [
-  { field: 'order_id', headerName: 'Order ID', width: 150 },
-  { field: 'order_date', headerName: 'Order Date', width: 150 },
-  { field: 'order_status', headerName: 'Order Status', width: 150 },
-  { field: 'updated_at', headerName: 'Updated At', width: 150 },
-  { field: 'total_amount', headerName: 'Total Amount (GH₵)', width: 150 },
+  { field: 'order_id', headerName: 'Order ID', flex: 1 },
+  { field: 'order_date', headerName: 'Order Date', flex: 1 },
+  { field: 'order_status', headerName: 'Order Status', flex: 1,    renderCell: (params) => {
+    // Conditional rendering or styling
+    return (
+      <Chip 
+        label={params.value}
+        color={
+          params.value === 'preparing' ? 'warning' : 
+          params.value === 'ready' ? 'success' : 
+          'success'
+        }
+      />
+    );
+  }
+},
+  { field: 'updated_at', headerName: 'Updated At', flex: 1 },
+  { field: 'total_amount', headerName: 'Total Amount (GH₵)', flex: 0.8 },
 ];
 
 

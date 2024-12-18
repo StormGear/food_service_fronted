@@ -1,6 +1,5 @@
 // @ts-nocheck
 "use client";
-
 import { RouterProvider } from "react-router-dom"
 import { AuthProvider } from "./contextproviders/Authcontext"
 import { CartProvider } from "./contextproviders/Cartcontext"
@@ -11,6 +10,7 @@ import { MenuProvider } from "./contextproviders/Menucontext";
 import { Toaster } from 'react-hot-toast';
 
 
+
 export default function App() {
   return (
     <ErrorBoundary
@@ -19,7 +19,6 @@ export default function App() {
       // Reset the state of your app so the error doesn't happen again
     }} 
     >
-
     <AuthProvider>
       <MenuProvider >
       <CartProvider>
@@ -28,7 +27,6 @@ export default function App() {
       </CartProvider>
       </MenuProvider>
     </AuthProvider>
- 
   </ErrorBoundary>
   )
 }

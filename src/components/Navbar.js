@@ -14,6 +14,8 @@ import Tooltip from '@mui/material/Tooltip';
 import Button from '@mui/material/Button';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { IoFastFoodSharp } from "react-icons/io5";
+import { AlertDialog, Flex } from '@radix-ui/themes';
+import { Button as RadixButton } from '@radix-ui/themes'; 
 
 
 const Navbar = () => {
@@ -77,17 +79,13 @@ const Navbar = () => {
           </button>
         </div>
         <div className="flex justify-end items-center absolute right-4">
-           <button className='hidden md:block' onClick={() => {
-            logout()
-            navigate('/')
-           }
-            }>
-          <Tooltip title="Logout" arrow>
-            <Button>
-             <IoLogOut className='text-red-400 text-2xl' />
-            </Button>
-          </Tooltip>
+           <button className='hidden md:block' >
+           <LogoutButton logoutHandler={() => {
+               logout()
+               navigate('/')
+           }}/>
            </button>
+      
            <button className='mr-2 hidden md:block' onClick={() => {
             navigate(`/users/${userId}/order`)
            }
@@ -98,7 +96,7 @@ const Navbar = () => {
             </Button>
           </Tooltip>
            </button>
-          <p className="text-white mr-2 hidden md:block font-bold">Welcome, {authState.user?.name}</p>
+          <p className="text-white mr-2 hidden md:block font-bold">Welcome  👋 , {authState.user?.name}</p>
            
             <span>
               <NavLink
@@ -144,5 +142,44 @@ const Navbar = () => {
     </nav>
   )
 }
+
+
+
+const LogoutButton = ({ logoutHandler }) => {
+  return (
+    <div>
+  <AlertDialog.Root>
+	<AlertDialog.Trigger>
+  <Tooltip title="Logout" arrow>
+  <Button>
+      <IoLogOut className='text-red-400 text-2xl' />
+    </Button>
+  </Tooltip>
+	</AlertDialog.Trigger>
+	<AlertDialog.Content maxWidth="450px">
+		<AlertDialog.Title>Logging out</AlertDialog.Title>
+		<AlertDialog.Description size="2">
+			Are you sure? This action will log you out.
+		</AlertDialog.Description>
+
+		<Flex gap="3" mt="4" justify="end">
+			<AlertDialog.Cancel>
+				<RadixButton variant="soft" color="gray">
+					Cancel
+				</RadixButton>
+			</AlertDialog.Cancel>
+			<AlertDialog.Action>
+				<RadixButton variant="solid" color="red" onClick={() => logoutHandler()}>
+					Logout
+				</RadixButton>
+			</AlertDialog.Action>
+		</Flex>
+	</AlertDialog.Content>
+</AlertDialog.Root>
+
+    </div>
+  )
+}
+
 
 export default Navbar

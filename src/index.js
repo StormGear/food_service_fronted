@@ -11,6 +11,8 @@ import Signup from './components/auth/Signup';
 import Login from './components/auth/Login';
 import Cart from './components/main/cart/Cart';
 import Orders from './components/main/orders/Orders';
+import { Theme } from "@radix-ui/themes";
+import "@radix-ui/themes/styles.css";
 
 export const router = createBrowserRouter([
   {
@@ -39,7 +41,9 @@ export const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Theme>
+     <App />
+    </Theme>
   </React.StrictMode>
 );
 

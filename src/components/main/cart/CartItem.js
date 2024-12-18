@@ -9,6 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { IoAddCircleSharp } from "react-icons/io5";
 import { FaCircleMinus } from "react-icons/fa6";
+import FastfoodIcon from '@mui/icons-material/Fastfood';
 
 
 
@@ -31,21 +32,21 @@ const CartItem = ({ item}) => {
       }
       
   return (
-    <li key={item.cartitem_id} className="py-4 flex justify-between bg-gray-200 rounded-lg shadow-md my-4 px-4">
+    <li key={item.cartitem_id} className="py-4 flex justify-between  border-primary-color border rounded-lg shadow-md my-4 px-4">
     <div>
       <p className="font-semibold">{item.name}</p>
       <p className="text-gray-700">Price: GH₵{item.price}</p>
        <p className="text-gray-700">Quantity: {quantity}</p>
       <div className="mt-4">
-    { item.extra_toppings.length > 0 && <p className="font-semibold">Extra Toppings:</p>} 
-    <ul className="list-disc ml-6">
+    { item.extra_toppings.length > 0 && <p className="font-semibold italic">Extra Toppings:</p>} 
+    <ul className="ml-2">
       {item.extra_toppings.map((opt) => (
-        <li key={opt}>{opt}</li>
+        <li className='flex items-center' key={opt}> <FastfoodIcon  sx={{ fontSize: 20, color: '#2ECC40' }} className="mr-2"/> {opt}</li>
       ))}
     </ul>
       </div>
       <div>
-      <p className="font-semibold">Total: GH₵ {item.price * quantity}</p>
+      <p className="font-semibold mt-2">Total: GH₵ {item.price * quantity}</p>
     </div> 
     </div>
 

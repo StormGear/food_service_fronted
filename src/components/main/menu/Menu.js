@@ -30,12 +30,17 @@ const Menu = () => {
   }, [setMenuItems]);
 
   return (
-
-      <div className="p-4 flex justify-center mx-14">
-        {menuItems.map((item) => (
-          <MenuItem key={item.menuitem_id} item={item} onAddToCart={addToCart} />
-        ))}
+      <>
+      <div>
+        <h2 className="m-10 pl-4 text-2xl font-bold text-primary-color">Menu</h2>
       </div>
+        <div className="p-4 gap-10 mt-10 mx-10 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 ">
+          {menuItems.map((item) => (
+            <MenuItem key={item.menuitem_id} item={item} onAddToCart={addToCart} />
+          ))}
+        </div>
+        </>
+    
   );
 };
 

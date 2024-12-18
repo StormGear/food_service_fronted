@@ -7,8 +7,6 @@ import baseUrl from "../../../constants";
 import CartItem from "./CartItem";
 import { loadingReducer, initialState } from "../../reducers/reducers";
 import Spinner from "../../Spinner";
-import DeleteIcon from '@mui/icons-material/Delete';
-import IconButton from '@mui/material/IconButton';
 import { IoArrowBackCircle } from "react-icons/io5";
 import { GiConfirmed } from "react-icons/gi";
 import logo from '../../../assets/images/logo.png';
@@ -16,6 +14,10 @@ import { MdRemoveShoppingCart } from "react-icons/md";
 import toast from 'react-hot-toast';
 import { IoFastFoodSharp } from "react-icons/io5";
 import { MdDelete } from "react-icons/md";
+import { Button as RadixButton } from '@radix-ui/themes' 
+import { AlertDialog, Flex } from '@radix-ui/themes';
+import Tooltip from '@mui/material/Tooltip';
+import Button from '@mui/material/Button';
 
 
 const Cart = () => {
@@ -59,10 +61,12 @@ const Cart = () => {
       } else {
         dispatchForClearCart({ type: 'ERROR', payload: response.message });
         console.error("Error clearing cart:", response.message);
+        toast.error(loadingStateForClearCart.payload)
       }
     } catch (error) {
       dispatchForClearCart({ type: 'ERROR', payload: error.message });
       console.error("Error clearing cart:", error);
+      toast.error(loadingStateForClearCart.payload)
     }
   }
 
@@ -140,15 +144,15 @@ const Cart = () => {
             <div className="flex flex-col sm:flex-row justify-between items-center mt-4">
               <button
                 onClick={() => handleClearCart(userId)}
-                className="bg-red-400 text-white px-4 py-2 my-2 rounded flex items-center" 
+                className="flex items-center" 
               >
                 {
-                  loadingStateForClearCart.loading ? <Spinner /> : <>
+                  <>
                   <div className="flex items-center">
-                    <MdDelete className="text-white text-xl" />
-                    <div>Clear Cart </div>
+                    <RadixButton color="red"> 
+                   { loadingStateForClearCart.loading ? <Spinner /> : <p className="flex items-center font-bold"> <MdDelete className="text-white text-xl" /> Clear Cart</p> }
+                      </RadixButton>
                   </div>
-                
                  </>
                 }
           
@@ -160,16 +164,15 @@ const Cart = () => {
               >
                 <span className="inline-flex items-center">
                   <IoArrowBackCircle className='text-primary-color text-xl' /> 
-                  <p className="text-primary-color mx-4">Back to Menu</p>
+                  <p className="text-primary-color mx-4 font-bold">Back to Menu</p>
                 </span>
               </NavLink>
               
-              <button
-                onClick={() => handlePlaceOrder(userId, totalCost)}
+              {/* <button
                 className="bg-secondary-color text-white px-4 py-2 my-2 rounded max-w-max"
-              >
-                { loadingState.loading ? <Spinner /> : <p className="flex items-center"> Place Order <GiConfirmed className="text-primary-color text-lg ml-4" /></p> }
-              </button>
+              > */}
+                { loadingState.loading ? <Spinner /> : <PlaceOrderButton placeOrderHandler={() => handlePlaceOrder(userId, totalCost)}/>}
+              {/* </button> */}
             </div>
             <div className="flex justify-end">
               {loadingState.loading && <p className="text-blue-500 font-bold">Placing order...</p>}
@@ -182,5 +185,44 @@ const Cart = () => {
     </div>
   );
 };
+
+
+const PlaceOrderButton = ({ placeOrderHandler }) => {
+  return (
+    <div>
+  <AlertDialog.Root>
+	<AlertDialog.Trigger>
+  <Tooltip title="Place Your Order" arrow>
+           <p className="flex items-center">    
+      <RadixButton color="green">
+        <p className="font-bold">Place Order</p>
+      <GiConfirmed className="text-white text-lg ml-2" />
+      </RadixButton> </p>
+  </Tooltip>
+	</AlertDialog.Trigger>
+	<AlertDialog.Content maxWidth="450px">
+		<AlertDialog.Title >Place An Order</AlertDialog.Title>
+		<AlertDialog.Description size="2">
+			Are you ready to place this order?
+		</AlertDialog.Description>
+
+		<Flex gap="3" mt="4" justify="end">
+			<AlertDialog.Cancel>
+				<RadixButton variant="soft" color="gray">
+					Cancel
+				</RadixButton>
+			</AlertDialog.Cancel>
+			<AlertDialog.Action>
+				<RadixButton variant="solid" color="green" onClick={placeOrderHandler}>
+					Yes
+				</RadixButton>
+			</AlertDialog.Action>
+		</Flex>
+	</AlertDialog.Content>
+</AlertDialog.Root>
+
+    </div>
+  )
+}
 
 export default Cart;
