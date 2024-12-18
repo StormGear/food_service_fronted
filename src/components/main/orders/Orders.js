@@ -47,6 +47,7 @@ const Orders = () => {
   return (
     <>
     <Navbar />
+    <h2 className="m-10 text-2xl font-semibold text-primary-color">Your Orders</h2>
     <div className='m-10  shadow-md rounded-lg flex items-center justify-center'>
       <DataGrid rows={orders} columns={columns} />
     </div>

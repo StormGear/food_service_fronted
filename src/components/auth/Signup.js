@@ -155,7 +155,7 @@ const Signup = () => {
                     name="name"
                     type="text"
                     placeholder="John Doe"
-                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
+                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-color focus:border-primary-color outline-none transition-colors"
                     value={formData.name}
                     onChange={handleInputChange}
                   />
@@ -246,7 +246,7 @@ const Signup = () => {
            disabled={(passwordCheck.length > 0 && emailCheck.length > 0 && nameCheck.length > 0) || loadingState.loading}
             type="submit"
             className={`mt-6 w-full  py-2 px-4 rounded-lg focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors
-              ${(passwordCheck.length > 0 || emailCheck.length > 0 || nameCheck.length > 0) || loadingState.loading ? 'bg-gray-400 text-white cursor-not-allowed' : 'bg-blue-600 text-white hover:bg-blue-700'}
+              ${(passwordCheck.length > 0 || emailCheck.length > 0 || nameCheck.length > 0) || loadingState.loading ? 'bg-gray-400 text-white cursor-not-allowed' : 'bg-primary-color text-white hover:bg-primary-color'}
               `}>
              { loadingState.loading ? <Spinner /> : 'Signup'}
           </button>
@@ -257,7 +257,7 @@ const Signup = () => {
              Already have an account? 
             <NavLink
               to="/"
-              className="text-blue-600 hover:underline focus:outline-none pl-3"
+              className="text-primary-color hover:underline focus:outline-none pl-3"
             >
              Login
             </NavLink>

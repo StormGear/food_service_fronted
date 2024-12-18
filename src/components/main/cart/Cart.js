@@ -15,6 +15,7 @@ import logo from '../../../assets/images/logo.png';
 import { MdRemoveShoppingCart } from "react-icons/md";
 import toast from 'react-hot-toast';
 import { IoFastFoodSharp } from "react-icons/io5";
+import { MdDelete } from "react-icons/md";
 
 
 const Cart = () => {
@@ -139,16 +140,15 @@ const Cart = () => {
             <div className="flex flex-col sm:flex-row justify-between items-center mt-4">
               <button
                 onClick={() => handleClearCart(userId)}
-                className="bg-red-400 text-white font-bold px-4 py-2 my-2 rounded max-w-max flex items-center" 
+                className="bg-red-400 text-white px-4 py-2 my-2 rounded flex items-center" 
               >
                 {
                   loadingStateForClearCart.loading ? <Spinner /> : <>
-                  <div>
-                    <IconButton>
-                      <DeleteIcon className=' text-white' />
-                    </IconButton>
+                  <div className="flex items-center">
+                    <MdDelete className="text-white text-xl" />
+                    <div>Clear Cart </div>
                   </div>
-                 <div>Clear Cart </div>
+                
                  </>
                 }
           
