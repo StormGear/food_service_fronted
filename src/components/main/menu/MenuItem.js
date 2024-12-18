@@ -48,11 +48,13 @@ const MenuItem = ({ item, onAddToCart }) => {
   }
   };
 
+  const defaultImage = "https://images.unsplash.com/photo-1617050318658-a9a3175e34cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80";
+
   return (
     <div className="border rounded-2xl shadow-md mb-4 min-w-72 max-h-min">
       <Inset clip="padding-box" side="top" pb="current">
 			<img
-				src="https://images.unsplash.com/photo-1617050318658-a9a3175e34cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+				src={item.image_url ?? defaultImage}
 				alt="Bold typography"
 				style={{
 					display: "block",
