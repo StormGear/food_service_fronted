@@ -1,6 +1,6 @@
 
 
-import React, { useEffect,useState } from 'react'
+import React, { useEffect,useState, useRef } from 'react'
 import { NavLink, useParams } from "react-router";
 import { useContext } from "react";
 import { CartContext } from "../contextproviders/Cartcontext";
@@ -28,6 +28,7 @@ const Navbar = () => {
     const toggleMenu = () => {
       setIsOpen(!isOpen);
     };
+  
 
     useEffect(() => {
       const fetchUserDetails = async () => {
@@ -50,7 +51,7 @@ const Navbar = () => {
 
     
   return (
-    <nav className='w-full'>
+    <nav>
       <div className='w-full relative  min-h-16 flex justify-between bg-secondary-color'>
           <div>
             <NavLink to={`/users/${userId}/`} className='text-white text-2xl font-semibold absolute left-4 p-4'>
@@ -121,24 +122,35 @@ const Navbar = () => {
 
 
        {/* Mobile Menu */}
-       <div className={`transition-width-height ease-in-out delay-150 duration-100 ${isOpen ? 'w-full h-full' : 'w-0 h-0'} lg:hidden  bg-secondary-color`}>
+       <div  className={` ${isOpen ? 'block' : 'hidden'}  bg-secondary-color`}>
         <ul className={`text-white`}>
-          <li className="py-3">
-            <NavLink to={`/users/${userId}/cart`} className="block px-4 py-2 font-bold">Cart - {cartItems.length}</NavLink>
+          <li className="py-1">
+            <NavLink to={`/users/${userId}/cart`} className={` px-4 py-2 font-bold relative`}> View cart  <ShoppingCartIcon className='text-white' /> <div className='absolute bg-green-700 rounded-full -top-1 inline font-extrabold text-center'> {cartItems.length}</div></NavLink>
           </li>
-          <li className="py-3">
-            <button
-              onClick={() => {
-                logout()
-                navigate('/')
-              }}
-              className="block px-4 py-2 font-bold"
-            >
-              Logout
-            </button>
+          <li className="py-1">
+          <button className='mr-2 hidden md:block' onClick={() => {
+            navigate(`/users/${userId}/order`)
+           }
+            }>
+              <div className="flex items-center px-4 py-2 font-bold">
+                View orders
+                <IoFastFoodSharp className='text-white text-2xl ml-2' />
+              </div>
+           </button>
+          </li>
+          <li>
+            <div className="flex items-center px-4 py-2 font-bold">
+              <p className='text-red-400'>logout</p>
+            <LogoutButton logoutHandler={() => {
+               logout()
+               navigate('/')
+           }}/>
+
+            </div>
+       
           </li>
         </ul>
-       </div>
+       </div> 
     </nav>
   )
 }

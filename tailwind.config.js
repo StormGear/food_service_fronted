@@ -7,7 +7,7 @@ module.exports = {
         'custom-image': "url('/src/assets/images/food.jpg')",
       },
       transitionProperty: {
-        'width-height': 'width, height',
+        'height': 'height',
       },
       colors: {
         'primary-color': '#2ECC40',
