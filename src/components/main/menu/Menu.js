@@ -6,13 +6,12 @@ import MenuItem from "./MenuItem";
 import { useContext } from "react";
 import { MenuContext } from "../../../contextproviders/Menucontext";
 import { CartContext } from "../../../contextproviders/Cartcontext";
-import { NavLink, useParams } from "react-router-dom";
+// import { NavLink, useParams } from "react-router-dom";
 // import { AuthContext } from "../../../contextproviders/Authcontext";
 
 const Menu = () => {
   const { menuItems, setMenuItems } = useContext(MenuContext);
   const {  addToCart } = useContext(CartContext);
-  const { userId } = useParams();
   // const { authState } = useContext(AuthContext)
 
   useEffect(() => {
@@ -21,7 +20,7 @@ const Menu = () => {
       try {
         const response = await axios.get(`${baseUrl}/api/menuitems`)
         const data = await response.data;
-        setMenuItems((prev) => [...data]);
+        setMenuItems([...data]);
       } catch (error) {
         console.error("Error fetching menu items:", error);
       }
@@ -32,7 +31,7 @@ const Menu = () => {
 
   return (
 
-      <div className="p-4">
+      <div className="p-4 flex justify-center mx-14">
         {menuItems.map((item) => (
           <MenuItem key={item.menuitem_id} item={item} onAddToCart={addToCart} />
         ))}

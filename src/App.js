@@ -8,6 +8,7 @@ import { router } from "./index"
 import { ErrorBoundary } from "react-error-boundary";
 import Fallback from "./components/ErrorBoundary";
 import { MenuProvider } from "./contextproviders/Menucontext";
+import { Toaster } from 'react-hot-toast';
 
 
 export default function App() {
@@ -18,13 +19,16 @@ export default function App() {
       // Reset the state of your app so the error doesn't happen again
     }} 
     >
+
     <AuthProvider>
       <MenuProvider >
       <CartProvider>
+        <Toaster/>
         <RouterProvider router={router}/>
       </CartProvider>
       </MenuProvider>
     </AuthProvider>
+ 
   </ErrorBoundary>
   )
 }

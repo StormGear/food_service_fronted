@@ -10,6 +10,7 @@ import HomePage from './components/main/HomePage';
 import Signup from './components/auth/Signup';
 import Login from './components/auth/Login';
 import Cart from './components/main/cart/Cart';
+import Orders from './components/main/orders/Orders';
 
 export const router = createBrowserRouter([
   {
@@ -29,7 +30,10 @@ export const router = createBrowserRouter([
     path: '/users/:userId/cart',
     element: <Cart />,
   },
-
+  {
+    path: '/users/:userId/order',
+    element: <Orders />,
+  },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

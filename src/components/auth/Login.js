@@ -9,6 +9,7 @@ import { loadingReducer, initialState } from '../reducers/reducers'
 import { NavLink } from 'react-router-dom';
 import  Spinner  from '../Spinner';
 import { useNavigate } from 'react-router-dom';
+import logo from '../../assets/images/logo.png';
 
 
 
@@ -103,12 +104,16 @@ const Login = () => {
         <div className="w-full md:w-1/2 max-w-md bg-white rounded-lg shadow-lg overflow-hidden">
           {/* Header */}
           <div className="p-6 bg-white border-b border-gray-200">
+            <div className='flex items-center'>
+              <img src={logo} alt="Eat Right" className='w-20 h-10 my-2' />
+              <span className='text-primary-color font-bold text-xl'>Eat Right</span>
+            </div>
             <h2 className="text-2xl font-bold text-gray-800">
               Login
             </h2>
   
             <p className="mt-1 text-sm text-gray-600">
-              Create an account to get started
+              Sign in to your account
             </p>
           </div>
   
@@ -130,7 +135,7 @@ const Login = () => {
                     name="email"
                     type="email"
                     placeholder="example@email.com"
-                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
+                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-color focus:border-primary-color outline-none transition-colors"
                     value={formData.email}
                     onChange={handleInputChange}
                   />
@@ -174,8 +179,8 @@ const Login = () => {
             <button
               disabled={(passwordCheck.length > 0 && emailCheck.length > 0) || loadingState.loading}
               type="submit"
-              className={`mt-6 w-full  py-2 px-4 rounded-lg focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors
-                ${(passwordCheck.length > 0 || emailCheck.length > 0) || loadingState.loading ? 'bg-gray-400 text-white cursor-not-allowed' : 'bg-blue-600 text-white hover:bg-blue-700'}
+              className={`mt-6 w-full  py-2 px-4 rounded-lg focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors
+                ${(passwordCheck.length > 0 || emailCheck.length > 0) || loadingState.loading ? 'bg-gray-400 text-white cursor-not-allowed' : 'bg-primary-color text-white hover:bg-primary-color'}
                 `}
             >
              { loadingState.loading ? <Spinner /> : 'Login'}
@@ -185,7 +190,7 @@ const Login = () => {
             <p className="mt-4 text-sm text-gray-600 text-center">
               
                Don't have an account? 
-              <NavLink to="/signup" className="text-blue-600 hover:underline focus:outline-none"> Sign Up</NavLink>
+              <NavLink to="/signup" className="text-primary-color hover:underline focus:outline-none"> Sign Up</NavLink>
             </p>
             <p className='mt-4 mx-auto flex items-center justify-center w-full text-red-500'> { loadingState.error}</p>
           </form>

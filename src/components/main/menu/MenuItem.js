@@ -44,7 +44,7 @@ const MenuItem = ({ item, onAddToCart }) => {
   };
 
   return (
-    <div className="border p-4 rounded shadow-md mb-4 max-w-72">
+    <div className="border p-4 rounded shadow-md mb-4 max-w-72 mx-20">
       <h2 className="text-xl font-semibold">{item.name}</h2>
       <p className="text-gray-700">Price: GH₵ {item.price}</p>
       <div className="text-gray-700">

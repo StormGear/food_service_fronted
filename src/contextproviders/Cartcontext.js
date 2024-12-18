@@ -87,18 +87,18 @@ export const CartProvider = ({ children }) => {
   }
 
   const placeOrder = async (userId, total_cost) => {
-    console.log('user with Id',  userId);
     try {
       let response;
-      console.log(`placing order for ${userId} at total cost of ${total_cost} from cart`)
+      console.log(`placing order for user with id ${userId} at total cost of ${total_cost} from cart`)
 
-        response = await axios.put(`${baseUrl}/api/orders/add-order`, {
+        response = await axios.post(`${baseUrl}/api/orders/add-order`, {
           user_id: userId,
           total_amount: total_cost
         });
+        
         return {
           success: 'success',
-          quantity: response.data.order_id
+          order_id: response.data.place_order
         }
     } catch (error) {
       if (error.response) {

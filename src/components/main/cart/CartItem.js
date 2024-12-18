@@ -7,6 +7,9 @@ import { IoCloseCircle } from 'react-icons/io5';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
+import { IoAddCircleSharp } from "react-icons/io5";
+import { FaCircleMinus } from "react-icons/fa6";
+
 
 
 const CartItem = ({ item}) => {
@@ -28,7 +31,7 @@ const CartItem = ({ item}) => {
       }
       
   return (
-    <li key={item.cartitem_id} className="py-4 flex justify-between">
+    <li key={item.cartitem_id} className="py-4 flex justify-between bg-gray-200 rounded-lg shadow-md my-4 px-4">
     <div>
       <p className="font-semibold">{item.name}</p>
       <p className="text-gray-700">Price: GH₵{item.price}</p>
@@ -51,9 +54,9 @@ const CartItem = ({ item}) => {
             <button
             key={item.cartitem_id}
             onClick={() => handleRemoveCartItem(item)}
-            className="hidden sm:inline rounded"
+            className="hidden sm:inline rounded mx-4"
             >
-                  <Tooltip title="Delete" >
+                  <Tooltip title="Remove item from cart" >
                      <IconButton>
                     <DeleteIcon className=' text-red-500' />
                     </IconButton>
@@ -73,7 +76,13 @@ const CartItem = ({ item}) => {
                     setTotalCost(totalCost - parseFloat(item.price))
                 }
             }
-            } >-</span>
+            } >
+              <Tooltip title="Remove one" >
+                <IconButton >
+              <FaCircleMinus className='text-red-400 inline text-lg' /> 
+              </IconButton>
+              </Tooltip>
+              </span>
                   <input
             min="1"
             value={quantity}
@@ -90,7 +99,13 @@ const CartItem = ({ item}) => {
             if (res.success) {
                 setTotalCost(totalCost + parseFloat(item.price))
             }
-                  }}>+</span>
+                  }}>
+                    <Tooltip title="Add one more" >
+                      <IconButton>
+                    <IoAddCircleSharp className='text-primary-color inline' />
+                    </IconButton>
+                    </Tooltip>
+                    </span>
         </div>
 
       <button

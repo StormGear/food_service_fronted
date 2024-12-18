@@ -9,6 +9,7 @@ import axios from 'axios';
 import baseUrl from '../../constants';
 import { useNavigate } from 'react-router-dom';
 import Spinner from '../Spinner';
+import logo from '../../assets/images/logo.png';
 
 const Signup = () => {
   const {  signup } = useContext(AuthContext)
@@ -120,12 +121,16 @@ const Signup = () => {
       <div className="w-full max-w-md bg-white rounded-lg shadow-lg overflow-hidden">
         {/* Header */}
         <div className="p-6 bg-white border-b border-gray-200">
+        <div className='flex items-center'>
+            <img src={logo} alt="Eat Right" className='w-20 h-10 my-2' />
+            <span className='text-primary-color font-bold text-xl'>Eat Right</span>
+            </div>
           <h2 className="text-2xl font-bold text-gray-800">
            Sign Up
           </h2>
 
           <p className="mt-1 text-sm text-gray-600">
-            Welcome back! Please login to your account.
+           Create an account to get started!
           
           </p>
         </div>

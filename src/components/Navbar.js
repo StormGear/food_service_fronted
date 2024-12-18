@@ -12,6 +12,8 @@ import { IoLogOut } from "react-icons/io5";
 import logo from '../assets/images/logo.png'; 
 import Tooltip from '@mui/material/Tooltip';
 import Button from '@mui/material/Button';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { IoFastFoodSharp } from "react-icons/io5";
 
 
 const Navbar = () => {
@@ -75,7 +77,7 @@ const Navbar = () => {
           </button>
         </div>
         <div className="flex justify-end items-center absolute right-4">
-           <button className='mr-4 hidden md:block' onClick={() => {
+           <button className='hidden md:block' onClick={() => {
             logout()
             navigate('/')
            }
@@ -86,7 +88,17 @@ const Navbar = () => {
             </Button>
           </Tooltip>
            </button>
-          <p className="text-white mr-4 hidden md:block font-bold">Welcome, {authState.user?.name}</p>
+           <button className='mr-2 hidden md:block' onClick={() => {
+            navigate(`/users/${userId}/order`)
+           }
+            }>
+          <Tooltip title="View all your Orders" arrow>
+            <Button>
+             <IoFastFoodSharp className='text-white text-2xl' />
+            </Button>
+          </Tooltip>
+           </button>
+          <p className="text-white mr-2 hidden md:block font-bold">Welcome, {authState.user?.name}</p>
            
             <span>
               <NavLink
@@ -97,11 +109,12 @@ const Navbar = () => {
                         setIsOpen(false)
                         return "bg-primary-color text-white px-4 py-2 rounded my-4 mx-4 hidden md:block"
                       }
-                      return "bg-primary-color text-white px-4 py-2 rounded my-4 mx-4 hidden md:block"
+                      return "bg-primary-color text-white px-4 py-2 rounded my-4 mx-4 hidden md:block relative"
                     }
                    }
                 >
-                 View Cart - {cartItems.length}
+                  <ShoppingCartIcon className='text-white' />
+                  <div className='absolute -top-2 -right-2 bg-green-700 rounded-full w-1/2 font-extrabold text-center'> {cartItems.length}</div>
                 </NavLink>
             </span>
           </div>
@@ -110,10 +123,10 @@ const Navbar = () => {
 
 
        {/* Mobile Menu */}
-       <div className={`transition-width-height ease-in-out delay-150 duration-100 ${isOpen ? 'w-full h-full' : 'w-0 h-0'} lg:hidden  bg-blue-300`}>
+       <div className={`transition-width-height ease-in-out delay-150 duration-100 ${isOpen ? 'w-full h-full' : 'w-0 h-0'} lg:hidden  bg-secondary-color`}>
         <ul className={`text-white`}>
           <li className="py-3">
-            <NavLink to={`/users/${userId}/cart`} className="block px-4 py-2">Cart - {cartItems.length}</NavLink>
+            <NavLink to={`/users/${userId}/cart`} className="block px-4 py-2 font-bold">Cart - {cartItems.length}</NavLink>
           </li>
           <li className="py-3">
             <button
@@ -121,7 +134,7 @@ const Navbar = () => {
                 logout()
                 navigate('/')
               }}
-              className="block px-4 py-2"
+              className="block px-4 py-2 font-bold"
             >
               Logout
             </button>
