@@ -17,7 +17,6 @@ import { MdDelete } from "react-icons/md";
 import { Button as RadixButton } from '@radix-ui/themes' 
 import { AlertDialog, Flex } from '@radix-ui/themes';
 import Tooltip from '@mui/material/Tooltip';
-import Button from '@mui/material/Button';
 
 
 const Cart = () => {
@@ -31,18 +30,18 @@ const Cart = () => {
 
   useEffect(() => {
     const cart_id = userId;
- // Fetch data when the component mounts
- const fetchCartItems = async () => {
-  try {
-    const response = await axios.get(`${baseUrl}/api/cartitems/allcart-totalcost/${cart_id}`)
-    const data = await response.data;
-    console.log('cart items', data)
-    setCartItems([...data.items]);
-    setTotalCost(data.total_cost)
-  } catch (error) {
-    console.error("Error fetching cart items:", error);
-  }
-};
+    // Fetch data when the component mounts
+    const fetchCartItems = async () => {
+      try {
+        const response = await axios.get(`${baseUrl}/api/cartitems/allcart-totalcost/${cart_id}`)
+        const data = await response.data;
+        console.log('cart items', data)
+        setCartItems([...data.items]);
+        setTotalCost(data.total_cost)
+      } catch (error) {
+        console.error("Error fetching cart items:", error);
+      }
+    };
 
   fetchCartItems();
     return () => console.log("Cart unmounted");

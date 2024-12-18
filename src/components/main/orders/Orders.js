@@ -9,9 +9,14 @@ import axios from 'axios';
 import baseUrl from '../../../constants';
 import dateFormat from "dateformat";
 import Chip from '@mui/material/Chip';
+import { Box, Card, Flex, Text } from '@radix-ui/themes';
+import LoyaltyIcon from '@mui/icons-material/Loyalty';
+import { IoArrowBackCircle } from 'react-icons/io5';
+import { NavLink } from 'react-router-dom';
 
 const Orders = () => {
     const [orders, setOrders] = useState([]);
+    const [points, setPoints] = useState(0);
     const { userId } = useParams()
     
 
@@ -38,7 +43,18 @@ const Orders = () => {
 
             }
         };
-    
+
+        const fetchPoints = async () => {
+            try {
+                const response = await axios.get(`${baseUrl}/api/loyalty/${userId}`)
+                setPoints(response.data);
+            } catch (error) {
+                console.error("Error fetching points:", error);
+            } finally {
+                console.log('points', points)
+            }
+        }
+        fetchPoints();
         fetchOrders();
         }, []);
     
@@ -47,7 +63,22 @@ const Orders = () => {
   return (
     <>
     <Navbar />
-    <h2 className="m-10 text-2xl font-semibold text-primary-color">Your Orders</h2>
+    <div className='flex items-center justify-between'>
+      <div className='m-10'>
+        <h2 className="text-2xl mb-2 font-semibold text-primary-color">Your Orders</h2>
+        <NavLink
+                to={`/users/${userId}`}
+                className="text-white rounded max-w-max"
+              >
+            <span className="inline-flex items-center">
+            <IoArrowBackCircle className='text-secondary-color text-xl' /> 
+            <p className="text-secondary-color mx-2 font-bold">Back to Menu</p>
+         </span>
+         </NavLink>
+      </div>
+      <LoyaltyCard points={points}/>
+    </div>
+    
     <div className='m-10  shadow-md rounded-lg flex items-center justify-center'>
       <DataGrid rows={orders} columns={columns} />
     </div>
@@ -76,6 +107,36 @@ const columns = [
   { field: 'updated_at', headerName: 'Updated At', flex: 1 },
   { field: 'total_amount', headerName: 'Total Amount (GH₵)', flex: 0.8 },
 ];
+
+
+
+
+const LoyaltyCard = ({points}) => {
+  return (
+    <>
+  {/* <Box maxWidth="240px" align="center" css={{ padding: 20 }}> */}
+  <div className='mr-10'>
+	<Card>
+		<Flex gap="2" align="center" direction='row'>
+      <LoyaltyIcon sx={{color: '#2ECC40', fontSize: 35}} />
+			<Box>
+				<Text as="div" size="2" weight="bold">
+					Your Loyal Points
+				</Text>
+				<Text as="div" size="2" color="gray">
+					You have {points} points
+				</Text>
+			</Box>
+		</Flex>
+	</Card>
+  </div>
+{/* </Box> */}
+    </>
+  )
+}
+
+
+
 
 
 export default Orders
