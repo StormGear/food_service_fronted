@@ -128,7 +128,7 @@ const Navbar = () => {
             <NavLink to={`/users/${userId}/cart`} className={` px-4 py-2 font-bold relative`}> View cart  <ShoppingCartIcon className='text-white' /> <div className='absolute bg-green-700 rounded-full -top-1 inline font-extrabold text-center'> {cartItems.length}</div></NavLink>
           </li>
           <li className="py-1">
-          <button className='mr-2 hidden md:block' onClick={() => {
+          <button className='mr-2' onClick={() => {
             navigate(`/users/${userId}/order`)
            }
             }>
