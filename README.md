@@ -1,70 +1,117 @@
-# Getting Started with Create React App
+# Food Ordering System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-stack food ordering system that allows users to browse menus, place orders, and track their food delivery. This system includes a responsive front-end interface, a robust back-end API, and a database to manage orders and user data.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- User registration and login
+- Browse food items
+- Add items to the cart and place orders
+- Real-time order tracking
+<!-- - Search for food items  -->
 
-### `npm start`
+<!-- - Admin dashboard to manage orders and inventory -->
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Tech Stack
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Frontend**: ReactJS
+- **Backend**: Node.js with Express
+- **Database**: PostgreSQL on Heroku
+- **Authentication**: Email/Password
+- **Deployment**: Deployed frontend on Vercel, backend deployed using Heroku
+<!-- - **Payment Gateway**: Integrated with [Stripe/PayPal/Other]  -->
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+### Prerequisites
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Node.js 
+- PostgreSQL 
+- Git
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Steps
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Clone the repository:
 
-### `npm run eject`
+   ```bash
+   git clone https://github.com/StormGear/food_service_fronted.git
+   cd food_service_fronted
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. Install dependencies:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   ```bash
+   npm install
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Screenshots
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+### Home Page
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+### Cart
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+### Orders
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+## Deployment
+
+### Frontend
+
+Deployed on Vercel:
+
+
+[Frontend link](https://food-service-fronted.vercel.app)
+
+
+
+### Backend Repo
+
+Open the backend repo to view guide for running backend locally.
+
+
+[Backend Repo link](https://food-service-d1ed0096c526.herokuapp.com/api-docs/)
+
+
+## Future Enhancements
+
+- Real-time notifications for order updates
+- Support for multiple restaurants
+- Advanced analytics for admin dashboard
+- Machine learning-based food recommendations
+
+
+## Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. Fork the repository
+2. Create a new branch (`git checkout -b feature/your-feature-name`)
+3. Commit your changes (`git commit -m 'Add some feature'`)
+4. Push to the branch (`git push origin feature/your-feature-name`)
+5. Open a Pull Request
+
+
+
+## Contact
+
+For questions or feedback, please reach out at:
+
+- Email: [papakofiboahen@gmail.com](mailto\:your-email@example.com)
+- GitHub: [StormGear](https://github.com/StormGear)
+
+
