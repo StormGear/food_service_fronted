@@ -54,19 +54,18 @@ A full-stack food ordering system that allows users to browse menus, place order
 
 ## Screenshots
 
-
-
 ### Home Page
+![Home Page](/assets/homepage.png)
 
 
 ### Cart
+![Cart](/assets/cart.png)
 
 
 ### Orders
+![Orders](/assets/orders.png)
 
 
-
----
 
 ## Deployment
 
