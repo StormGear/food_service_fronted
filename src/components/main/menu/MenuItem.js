@@ -60,7 +60,7 @@ const MenuItem = ({ item, onAddToCart }) => {
 					display: "block",
 					objectFit: "cover",
 					width: "100%",
-					height: 140,
+					height: 200,
 					backgroundColor: "var(--gray-5)",
 				}}
         className="rounded-t-2xl"
