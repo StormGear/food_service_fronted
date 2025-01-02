@@ -52,7 +52,7 @@ const Navbar = () => {
     
   return (
     <nav>
-      <div className='w-full relative  min-h-16 flex justify-between bg-secondary-color'>
+      <div className='w-full relative  min-h-16 flex justify-between bg-secondary-color animate-bounce animate-thrice' >
           <div>
             <NavLink to={`/users/${userId}/`} className='text-white text-2xl font-semibold absolute left-4 p-4'>
             <img src={logo} alt="Logo" className='w-20 h-8'/> 

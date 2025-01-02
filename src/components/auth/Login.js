@@ -101,7 +101,7 @@ const Login = () => {
   
     return (
       <div className="bg-custom-image bg-cover bg-center bg-no-repeat min-h-screen bg-gray-100 flex items-center justify-center p-4">
-        <div className="w-full md:w-1/2 max-w-md bg-white rounded-lg shadow-lg overflow-hidden">
+        <div className="w-full md:w-1/2 max-w-md bg-white rounded-lg shadow-lg overflow-hidden animate-fade-down animate-once">
           {/* Header */}
           <div className="p-6 bg-white border-b border-gray-200">
             <div className='flex items-center'>
