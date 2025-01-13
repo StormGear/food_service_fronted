@@ -8,6 +8,8 @@ A full-stack food ordering system that allows users to browse menus, place order
 - Browse food items
 - Add items to the cart and place orders
 - Real-time order tracking
+- A loyalty program to enhance the user experience
+
 <!-- - Search for food items  -->
 
 <!-- - Admin dashboard to manage orders and inventory -->
@@ -83,7 +85,7 @@ Deployed on Vercel:
 Open the backend repo to view guide for running backend locally.
 
 
-[Backend Repo link](https://food-service-d1ed0096c526.herokuapp.com/api-docs/)
+[Backend Repo link]()
 
 
 ## Future Enhancements
