@@ -85,7 +85,7 @@ Deployed on Vercel:
 Open the backend repo to view guide for running backend locally.
 
 
-[Backend Repo link]()
+[Backend Repo link](https://github.com/StormGear/food_service_backend.git)
 
 
 ## Future Enhancements
